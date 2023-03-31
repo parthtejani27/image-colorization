@@ -1,0 +1,107 @@
+/* Form Container */
+
+.form-container {
+  background-color: #ffffff;
+  padding: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Form Fields */
+.form-control-label {
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 5px;
+}
+
+.form-control-lg {
+  height: 100px;
+}
+
+textarea.form-control {
+  height: 200px;
+}
+
+.selectpicker {
+  border-radius: 5px;
+}
+
+.custom-file-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 5px;
+}
+
+/* Submit Button */
+.btn-submit {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
+}
+
+.btn-submit:hover {
+  background-color: #0069d9;
+}
+
+.btn-submit:focus {
+  outline: none;
+}
+
+/* File Upload */
+.custom-file-input {
+  border-radius: 5px;
+}
+
+.custom-file-label::after {
+  border-radius: 5px;
+}
+
+
+.custom-file-label::after {
+  content: "Select file";
+}
+
+.custom-file-input:focus~.custom-file-label::after {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-file-input:lang(en)~.custom-file-label::after {
+  content: "Browse";
+}
+
+.custom-file-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.custom-file-upload:hover {
+  background-color: #ddd;
+}

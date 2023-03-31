@@ -1,0 +1,1 @@
+add default sample image as a profile picture.

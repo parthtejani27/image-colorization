@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+	
+	{% if title %}	
+		<title>Colorize of Image - {{ title }}</title>
+	{% else %}
+		<title>Colorize of Image</title>
+	{% endif %}
+
+	<style>
+		/* General CSS reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Main header styles */
+.site-header {
+  width: 100%;
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #333;
+}
+
+.navbar-brand {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 2rem;
+}
+
+.navbar-toggler {
+  border: none;
+  background-color: transparent;
+}
+
+.navbar-toggler-icon {
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' strokeLinecap='round' strokeMiterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.nav-item {
+  margin-right: 1rem;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .navbar-nav {
+    display: none;
+  }
+
+  .navbar-toggler {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .navbar-toggler {
+    display: none;
+  }
+}
+
+
+/* Home Page Alternative */
+.home-page-alt {
+  margin-top: 1rem;
+}
+
+.content-section-alt {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin-bottom: 2rem;
+}
+
+.article-metadata-alt {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  color: #777;
+}
+
+.article-metadata-alt a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.article-metadata-alt a:hover {
+  text-decoration: underline;
+}
+
+.article-title-alt {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-title-alt:hover {
+  color: #007bff;
+}
+
+.images-container-alt {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.image-alt {
+  width: 49%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Pagination Alternative */
+.pagination-alt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 1rem 0;
+}
+
+.pagination-alt li {
+  margin: 0 0.25rem;
+}
+
+.pagination-alt li a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  color: #333;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.pagination-alt li a:hover,
+.pagination-alt li a.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: transparent;
+}
+
+.content-section {
+  max-width: 500px;
+  margin: auto;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #eaeaea;
+  box-shadow: none;
+}
+
+.form-group select {
+  appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 3l5 4 5-4H0z' fill='%23000000'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 15px) center;
+}
+
+.form-group input[type="file"] {
+  display: none;
+}
+
+.form-group .custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #898080;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-group .custom-file-upload:hover {
+  background-color: #0069d9;
+}
+
+.form-group .custom-file-upload:active {
+  background-color: #0053a1;
+}
+
+.form-group .invalid-feedback {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #dc3545;
+}
+
+.form-group .btn-outline-info {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #5e5858;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-group .btn-outline-info:hover {
+  background-color: #0069d9;
+}
+
+.form-group .btn-outline-info:active {
+  background-color: #0053a1;
+}
+
+
+
+	</style>
+</head>
+<body>
+	<header class="site-header">
+	  	<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+		    <div class="container">
+		      <a class="navbar-brand mr-4" href="/">Colorize of Image</a>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="navbar-toggler-icon"></span>
+		      </button>
+		      <div class="collapse navbar-collapse" id="navbarToggle">
+		        <div class="navbar-nav mr-auto">
+		            {% if current_user.is_authenticated %}
+			          	<a class="nav-item nav-link" href="{{url_for('home')}}">Home</a>
+			          	<!--<a class="nav-item nav-link" href="{{url_for('about')}}">About</a>-->
+			          	<a class="nav-item nav-link" href="{{url_for('user_post',username=current_user.username)}}">Your Dashboard</a>
+						<a class="nav-item nav-link" href="{{url_for('new_post')}}">Convert Image</a>
+			        {% else %}
+			        	<a class="nav-item nav-link" href="{{url_for('home')}}">Home</a>
+			          	<!--<a class="nav-item nav-link" href="{{url_for('about')}}">About</a>-->
+			        {% endif %}
+		        </div>
+		        <!-- Navbar Right Side -->
+		        <div class="navbar-nav">
+		          {% if current_user.is_authenticated %}
+		          	
+		          	<a class="nav-item nav-link" href="{{url_for('account')}}">Account</a>
+		          	<a class="nav-item nav-link" href="{{url_for('logout')}}">Logout</a>
+		          {% else %}
+		          	<a class="nav-item nav-link" href="{{url_for('login')}}">Login</a>
+		          	<a class="nav-item nav-link" href="{{url_for('register')}}">Register</a>
+		          {% endif%}
+		          
+		        </div>
+		      </div>
+		    </div>
+	  	</nav>
+	</header>
+	<main role="main" class="container">
+		<div class="row">
+		    <div class="col-md-12">
+		    	{% with messages = get_flashed_messages(with_categories=true) %}
+		    		{% if messages%}
+		    			{% for category, message in messages %}
+		    				<div class='alert alert-{{ category }}'>
+		    					{{ message }}
+		    				</div>
+		    			{% endfor %}
+		    		{% endif %}
+		    	{% endwith %}
+		    	{% block content %}{% endblock %}
+		    	
+		    </div>
+		    <!--<div class="col-md-4">
+		      <div class="content-section">
+		        <h3>Previous Work</h3>
+		        <p class='text-muted'>Option to choose your previous work. 
+		          <ul class="list-group">
+		            <li class="list-group-item list-group-item-light"><a href="{{url_for('abstract')}}">Abstract</a></li>
+		            <li class="list-group-item list-group-item-light"><a href="{{url_for('future_work')}}">Future Work</a></li>
+		            <li class="list-group-item list-group-item-light"><a href="{{url_for('created_by')}}">Created By</a></li>
+		            <li class="list-group-item list-group-item-light">How it works?</li>
+		          </ul>
+		        </p>
+		      </div>-->
+		    </div>
+		</div>
+	</main>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script language="JavaScript">
+  /**
+    * Disable right-click of mouse, F12 key, and save key combinations on page
+    * For full source code, visit https://mycyberuniverse.com
+    */
+  window.onload = function() {
+    document.addEventListener("contextmenu", function(e){
+      e.preventDefault();
+    }, false);
+    document.addEventListener("keydown", function(e) {
+    //document.onkeydown = function(e) {
+      // "I" key
+      if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+        disabledEvent(e);
+      }
+      // "J" key
+      if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+        disabledEvent(e);
+      }
+      // "S" key + macOS
+      if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+        disabledEvent(e);
+      }
+      // "U" key
+      if (e.ctrlKey && e.keyCode == 85) {
+        disabledEvent(e);
+      }
+      // "F12" key
+      if (event.keyCode == 123) {
+        disabledEvent(e);
+      }
+    }, false);
+    function disabledEvent(e){
+      if (e.stopPropagation){
+        e.stopPropagation();
+      } else if (window.event){
+        window.event.cancelBubble = true;
+      }
+      e.preventDefault();
+      return false;
+    }
+  };
+</script>
+</body>
+</html>
