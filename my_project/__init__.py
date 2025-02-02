@@ -5,7 +5,7 @@ from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cb1d488376f914f922df982974fb95a6'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///E:/MSC/MSC SEM 2/RM/colorize-image-main/colorize-image-main/my_project/site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 try:
     db = SQLAlchemy(app)
     print("databaseeeeeeeeeeeeeeeeeeeee",db)

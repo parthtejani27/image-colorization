@@ -29,6 +29,8 @@ class bw2color_image:
 		# load the input image from disk, scale the pixel intensities to the
 		# range [0, 1], and then convert the image from the BGR to Lab color
 		# space
+
+		print("pppppppp",args)
 		image = cv2.imread(args)
 		scaled = image.astype("float32") / 255.0
 		lab = cv2.cvtColor(scaled, cv2.COLOR_BGR2LAB)

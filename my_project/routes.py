@@ -125,8 +125,9 @@ def convert(path):
 	# load the input image from disk, scale the pixel intensities to the
 	# range [0, 1], and then convert the image from the BGR to Lab color
 	# space
-	print("args = ",args)
-	image = cv2.imread(args)
+	print("args1 = ",args)
+	
+	image = cv2.imread(argsß)
 
 	scaled = image.astype("float32") / 255.0
 	lab = cv2.cvtColor(scaled, cv2.COLOR_BGR2LAB)
@@ -168,27 +169,29 @@ def convert(path):
 	cv2.imshow("Original", image)
 	cv2.imshow("Colorized", colorized)
 	img_name = args.split('/')
-	print("img_name = ",img_name)
+	print("img_name = ", img_name)
 	image_name = img_name[1].split('\\')
-	print("image_name = ",image_name)
-	outpath = os.path.join(app.root_path,'static/output_pics',image_name[1])
-	#save the image
+	print("image_name = ", image_name)
+	outpath = os.path.join(app.root_path, 'static/output_pics', image_name[1])
+	# save the image
 	cv2.imwrite(outpath, colorized)
 	return image_name[1]
 
 
-
+print("apppppppppppp", app.root_path)
 def save_input_picture(form_picture):
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.root_path, 'static/input_pics', picture_fn)
-    form_picture.save(picture_path)
+  random_hex = secrets.token_hex(8)
+  _, f_ext = os.path.splitext(form_picture.filename)
+  picture_fn = random_hex + f_ext
+  picture_path = os.path.join(app.root_path, 'static/input_pics', picture_fn)
+  form_picture.save(picture_path)
 
-    output_fn = convert(picture_path)
-    picture_fn_2 = [output_fn, picture_fn]
+  print(f"Image not found: {picture_path}")
 
-    return picture_fn_2
+  output_fn = convert(picture_path)
+  picture_fn_2 = [output_fn, picture_fn]
+
+  return picture_fn_2
 
 
 @app.route('/post/new', methods=['GET', 'POST'])
